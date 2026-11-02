@@ -1,6 +1,8 @@
-CREATE TABLE IF NOT EXISTS productos (
-  id BIGINT AUTO_INCREMENT PRIMARY KEY,
-                                         nombre VARCHAR(120) NOT NULL,
-    precio DECIMAL(10,2) NOT NULL,
-    stock INT NOT NULL
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+DROP TABLE IF EXISTS productos;
+
+CREATE TABLE productos (
+                           id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                           nombre VARCHAR(120) NOT NULL,
+                           precio DECIMAL(10,2) NOT NULL,
+                           stock INT NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
