@@ -1,12 +1,12 @@
 package etec.bdd.dto
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer
 import etec.bdd.entity.Producto
-import tools.jackson.databind.annotation.JsonSerialize
-import tools.jackson.databind.ser.std.ToStringSerializer
 import java.math.BigDecimal
 
 data class ProductoResponse(
-    val id: Int, // <-- Cambiado a Int
+    val id: Int,
 
     val nombre: String,
 

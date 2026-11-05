@@ -1,11 +1,12 @@
 package etec.bdd.exception
 
+import com.fasterxml.jackson.core.JsonProcessingException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.http.converter.HttpMessageNotReadableException
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
-import tools.jackson.core.JacksonException
 import java.time.LocalDateTime
 
 data class ErrorResponse(
@@ -41,8 +42,8 @@ class GlobalExceptionHandler{
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body)
     }
 
-    @ExceptionHandler(JacksonException::class)
-    fun handleJsonException(ex: JacksonException): ResponseEntity<ErrorResponse> {
+    @ExceptionHandler(HttpMessageNotReadableException::class)
+    fun handleJsonException(ex: HttpMessageNotReadableException): ResponseEntity<ErrorResponse> {
         val body = ErrorResponse(
             status = HttpStatus.BAD_REQUEST.value(),
             error = "Bad Request",
