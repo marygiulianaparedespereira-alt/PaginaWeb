@@ -11,16 +11,16 @@ data class Producto(
     val id: Long = 0L,
 
     @Column(nullable = false)
-    val nombre: String,
+    var nombre: String,
 
     @Column(nullable = false)
-    val precio: BigDecimal,
+    var precio: BigDecimal,
 
     @Column(nullable = false)
-    val stock: Int,
+    var stock: Int,
 
     @Column(nullable = false)
-    val categoria: String,
+    var categoria: String,
 
-    val imagen: String? = null
+    var imagen: String? = null
 )

@@ -3,6 +3,7 @@ package etec.bdd.controller
 import etec.bdd.dto.ProductoRequest
 import etec.bdd.dto.ProductoResponse
 import etec.bdd.service.ProductoService
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -32,6 +33,29 @@ class ProductoController(private val productoService: ProductoService) {
     @PostMapping
     fun crear(@RequestBody request: ProductoRequest): ResponseEntity<ProductoResponse> {
         val nuevoProducto = productoService.crear(request)
-        return ResponseEntity.ok(nuevoProducto)
+        return ResponseEntity.status(HttpStatus.CREATED).body(nuevoProducto)
+    }
+
+    // Actualizar / Modificar un producto
+    @PutMapping("/{id}")
+    fun actualizar(
+        @PathVariable id: Long,
+        @RequestBody request: ProductoRequest
+    ): ResponseEntity<ProductoResponse> {
+        val productoActualizado = productoService.actualizar(id, request)
+        if (productoActualizado != null) {
+            return ResponseEntity.ok(productoActualizado)
+        }
+        return ResponseEntity.notFound().build()
+    }
+
+    // Eliminar un producto
+    @DeleteMapping("/{id}")
+    fun eliminar(@PathVariable id: Long): ResponseEntity<Void> {
+        val eliminado = productoService.eliminar(id)
+        if (eliminado) {
+            return ResponseEntity.noContent().build()
+        }
+        return ResponseEntity.notFound().build()
     }
 }
