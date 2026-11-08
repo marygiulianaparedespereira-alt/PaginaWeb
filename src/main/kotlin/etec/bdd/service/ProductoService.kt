@@ -14,7 +14,6 @@ open class ProductoService(private val productoRepository: ProductoRepository) {
     }
 
     open fun obtenerPorId(id: Long): ProductoResponse? {
-        // Usamos id.toInt() porque el repositorio espera un Int
         val producto = productoRepository.findById(id.toInt()).orElse(null)
         return producto?.let { ProductoResponse.fromEntity(it) }
     }
@@ -24,7 +23,8 @@ open class ProductoService(private val productoRepository: ProductoRepository) {
             nombre = req.nombre,
             precio = req.precio,
             stock = req.stock,
-            categoria = req.categoria
+            categoria = req.categoria,
+            imagen = req.imagen // <-- Incluimos la imagen al crear el producto
         )
         val guardado = productoRepository.save(nuevoProducto)
         return ProductoResponse.fromEntity(guardado)

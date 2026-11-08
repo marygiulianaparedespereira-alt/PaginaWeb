@@ -22,5 +22,7 @@ data class ProductoRequest(
 
 
     @field:NotBlank(message = "La categoría no puede estar vacía")
-    val categoria: String
+    val categoria: String,
+
+    val imagen: String?
 )

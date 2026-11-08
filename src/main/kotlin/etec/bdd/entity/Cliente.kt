@@ -9,12 +9,18 @@ data class Cliente(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
 
+    @Column(nullable = false, unique = true)
     val usuario: String,
 
-    @Column(unique = true)
+    @Column(nullable = false, unique = true)
     val email: String,
 
+    @Column(nullable = false)
     val contrasena: String,
 
-    val rol: String = "CLIENTE" // "ADMIN" para gestión interna, "CLIENTE" para compradores
+    @Column(nullable = false)
+    val rol: String = "CLIENTE",
+
+    @Column(nullable = true)
+    val nombre: String? = null
 )

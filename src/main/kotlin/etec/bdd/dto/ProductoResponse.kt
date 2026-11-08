@@ -7,7 +7,8 @@ data class ProductoResponse(
     val nombre: String,
     val precio: Double,
     val stock: Int,
-    val categoria: String // <-- 1. Agregamos el campo aquí
+    val categoria: String,
+    val imagen: String? // <-- 1. Agregamos la propiedad de la imagen
 ) {
     companion object {
         fun fromEntity(p: Producto): ProductoResponse =
@@ -16,7 +17,8 @@ data class ProductoResponse(
                 nombre = p.nombre,
                 precio = p.precio.toDouble(),
                 stock = p.stock,
-                categoria = p.categoria // <-- 2. Mapeamos la categoría desde la entidad
+                categoria = p.categoria,
+                imagen = p.imagen // <-- 2. Mapeamos la imagen desde la entidad
             )
     }
 }

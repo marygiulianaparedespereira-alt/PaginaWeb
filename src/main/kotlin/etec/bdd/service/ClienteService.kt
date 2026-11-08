@@ -1,24 +1,22 @@
 package etec.bdd.service
 
-import etec.bdd.dto.ClienteRequest
 import etec.bdd.entity.Cliente
 import etec.bdd.repository.ClienteRepository
 import org.springframework.stereotype.Service
 
 @Service
-open class ClienteService(private val clienteRepository: ClienteRepository) {
+class ClienteService(private val clienteRepository: ClienteRepository) {
 
-    open fun registrar(req: ClienteRequest): Cliente {
-        val cliente = Cliente(
-            usuario = req.usuario,
-            email = req.email,
-            contrasena = req.contrasena
-        )
+    fun registrar(cliente: Cliente): Cliente {
         return clienteRepository.save(cliente)
     }
 
-    open fun login(email: String, contrasena: String): Cliente? {
-        val cliente = clienteRepository.findByEmail(email)
+    fun buscarPorUsuario(usuario: String): Cliente? {
+        return clienteRepository.findByUsuario(usuario).orElse(null)
+    }
+
+    fun login(usuario: String, contrasena: String): Cliente? {
+        val cliente = clienteRepository.findByUsuario(usuario).orElse(null)
         if (cliente != null && cliente.contrasena == contrasena) {
             return cliente
         }

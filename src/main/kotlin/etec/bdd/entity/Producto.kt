@@ -20,5 +20,7 @@ data class Producto(
     val stock: Int,
 
     @Column(nullable = false)
-    val categoria: String
+    val categoria: String,
+
+    val imagen: String? = null
 )
