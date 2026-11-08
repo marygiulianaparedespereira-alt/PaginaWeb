@@ -7,20 +7,14 @@ import jakarta.persistence.*
 data class Cliente(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0L,
+    val id: Long? = null,
 
-    @Column(nullable = false)
-    val nombre: String,
+    val usuario: String,
 
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     val email: String,
 
-    @Column(nullable = false)
-    val password: String,
+    val contrasena: String,
 
-    val telefono: String? = null,
-    val direccion: String? = null,
-
-    @Column(nullable = false)
-    val rol: String = "COMPRADOR" // Puede ser 'COMPRADOR' o 'ADMIN'
+    val rol: String = "CLIENTE" // "ADMIN" para gestión interna, "CLIENTE" para compradores
 )

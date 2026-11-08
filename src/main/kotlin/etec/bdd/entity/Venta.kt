@@ -22,5 +22,8 @@ data class Venta(
     val total: BigDecimal,
 
     @Column(nullable = false)
-    val estado: String = "Pendiente"
+    val estado: String = "Pendiente",
+
+    @Column(name = "metodo_pago", nullable = false)
+    val metodoPago: String = "Efectivo" // Agregamos esto para los métodos de pago
 )

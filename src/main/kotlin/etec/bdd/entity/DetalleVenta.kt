@@ -5,6 +5,7 @@ import java.math.BigDecimal
 
 @Entity
 @Table(name = "detalle_venta")
+
 data class DetalleVenta(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
