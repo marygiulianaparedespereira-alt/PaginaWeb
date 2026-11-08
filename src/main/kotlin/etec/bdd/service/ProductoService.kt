@@ -3,37 +3,28 @@ package etec.bdd.service
 import etec.bdd.dto.ProductoRequest
 import etec.bdd.dto.ProductoResponse
 import etec.bdd.entity.Producto
-import etec.bdd.exception.ProductoNoEncontradoException
 import etec.bdd.repository.ProductoRepository
-import org.springframework.data.domain.Page
-import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Transactional
 
 @Service
-class ProductoService(
-    private val productoRepository: ProductoRepository
-) {
+open class ProductoService(private val productoRepository: ProductoRepository) {
 
-    @Transactional(readOnly = true)
-    fun listar(pageable: Pageable): Page<ProductoResponse> {
-        return productoRepository.findAll(pageable)
-            .map { ProductoResponse.fromEntity(it) }
+    open fun obtenerTodos(): List<ProductoResponse> {
+        return productoRepository.findAll().map { ProductoResponse.fromEntity(it) }
     }
 
-    @Transactional(readOnly = true)
-    fun obtener(id: Int): ProductoResponse {
-        val producto = productoRepository.findById(id)
-            .orElseThrow { ProductoNoEncontradoException(id.toLong()) }
-        return ProductoResponse.fromEntity(producto)
+    open fun obtenerPorId(id: Long): ProductoResponse? {
+        // Usamos id.toInt() porque el repositorio espera un Int
+        val producto = productoRepository.findById(id.toInt()).orElse(null)
+        return producto?.let { ProductoResponse.fromEntity(it) }
     }
 
-    @Transactional
-    fun crear(req: ProductoRequest): ProductoResponse {
+    open fun crear(req: ProductoRequest): ProductoResponse {
         val nuevoProducto = Producto(
             nombre = req.nombre,
             precio = req.precio,
-            stock = req.stock
+            stock = req.stock,
+            categoria = req.categoria
         )
         val guardado = productoRepository.save(nuevoProducto)
         return ProductoResponse.fromEntity(guardado)

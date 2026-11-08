@@ -18,5 +18,9 @@ data class ProductoRequest(
 
     @field:NotNull
     @field:Min(0)
-    val stock: Int
+    val stock: Int,
+
+
+    @field:NotBlank(message = "La categoría no puede estar vacía")
+    val categoria: String
 )

@@ -1,26 +1,24 @@
 package etec.bdd.entity
 
-import jakarta.persistence.Entity
-import jakarta.persistence.Table
-import jakarta.persistence.Id
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Column
+import jakarta.persistence.*
 import java.math.BigDecimal
 
 @Entity
-@Table(name = "productos")
-class Producto(
+@Table(name = "producto")
+data class Producto(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int? = null,
+    val id: Long = 0L,
 
-    @Column(nullable = false, length = 120)
+    @Column(nullable = false)
     val nombre: String,
 
-    @Column(nullable = false, precision = 10, scale = 2)
+    @Column(nullable = false)
     val precio: BigDecimal,
 
     @Column(nullable = false)
-    val stock: Int
+    val stock: Int,
+
+    @Column(nullable = false)
+    val categoria: String
 )
